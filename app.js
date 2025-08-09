@@ -10,11 +10,41 @@ function agregarAmigo() {
         alert("Por favor, inserte un nombre");
     } else {
         amigos.push(nombres);
+        actualizarLista();
     }
-    limpiarLista();
+    limpiarCaja();
+
+    return;
 }
 
-function limpiarLista() {
+function actualizarLista() {
+    let ElementoLista = document.getElementById("listaAmigos")
+    ElementoLista.innerHTML = "";
+    for (let i = 0; i < amigos.length; i++) {
+        let li = document.createElement("li");
+        li.textContent = amigos[i];
+        ElementoLista.appendChild(li);
+    }
+}
+
+function sortearAmigo() {
+    if (amigos.length < 2) {
+        alert("Debe haber al menos dos amigos para realizar el sorteo");
+        return;
+    }
+
+    let resultadoElemento = document.getElementById("resultado");
+    resultadoElemento.innerHTML = "";
+
+    let indiceAleatorio = Math.floor(Math.random() * amigos.length);
+    let amigoSorteado = amigos[indiceAleatorio];
+
+    resultadoElemento.innerHTML = `<li> El amigo secreto es: <strong>${amigoSorteado}</strong></li>`;
+}
+
+
+
+function limpiarCaja() {
     let valorLista = document.querySelector("#amigo");
     valorLista.value ="";
 }
